@@ -9,7 +9,7 @@ class BoostBuildConan(ConanFile):
     """
     name = "Boost.Build"
     version = "1.64.0"
-    generators = "cmake", "txt"
+    generators = "txt"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False]}
     url = "https://github.com/boostorg/build"
