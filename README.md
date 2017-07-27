@@ -14,20 +14,20 @@ If your are in Windows you should run it from a VisualStudio console in order to
 
 ## Upload packages to server
 
-    $ conan upload boost.build/1.64.0@bincrafters/stable --all
+    $ conan upload Boost.Build/1.64.0@bincrafters/stable --all
 
 ## Reuse the packages
 
 ### Basic setup
 
-    $ conan install boost.build/1.64.0@bincrafters/stable
+    $ conan install Boost.Build/1.64.0@bincrafters/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    boost.build/1.64.0@bincrafters/stable
+    Boost.Build/1.64.0@bincrafters/stable
 
     [generators]
     cmake

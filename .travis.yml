@@ -1,6 +1,6 @@
 env:
    global:
-     - CONAN_REFERENCE: "boost.build/1.64.0"
+     - CONAN_REFERENCE: "Boost.Build/1.64.0"
      - CONAN_CHANNEL: "ci"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
      - CONAN_TOTAL_PAGES: 2
