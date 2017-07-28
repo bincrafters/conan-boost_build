@@ -1,6 +1,6 @@
 """Conan.io recipe for Boost.Build
 """
-from conans import ConanFile, tools
+from conans import ConanFile, tools, os
 
 
 class BoostBuildConan(ConanFile):
@@ -14,7 +14,7 @@ class BoostBuildConan(ConanFile):
     FOLDER_NAME = "boost_%s" % version.replace(".", "_")
 
     def source(self):
-        self.run("git clone --depth=50 --branch=boost-%s %s.git %s" % (self.version, self.url, self.FOLDER_NAME))
+        self.run("git clone --depth=50 --branch=boost-{0} {1}.git {2}".format(self.version, self.url, self.FOLDER_NAME))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
@@ -22,19 +22,19 @@ class BoostBuildConan(ConanFile):
         if self.settings.os == "Windows" and self.settings.compiler == "gcc":
             command += " mingw"
             flags.append("--layout=system")
-        if self.settings.compiler == "Visual Studio":
-            flags.append("toolset=msvc-%s.0" % self.settings.compiler.version)
-        elif str(self.settings.compiler) in ["clang", "gcc"]:
-            flags.append("toolset=%s"% self.settings.compiler)
 
-        try:
-
-            self.run("cd %s && %s" % (self.FOLDER_NAME, command))
-        except:
-            self.run("cd %s && type bootstrap.log" % self.FOLDER_NAME
-                     if self.settings.os == "Windows"
-                     else "cd %s && cat bootstrap.log" % self.FOLDER_NAME)
-            raise
+        build_path_full = os.path.join(self._conanfile_directory, self.FOLDER_NAME)
+        vscmd_path_full = os.path.join(build_path_full, "src", "engine")
+        with tools.environment_append({"VSCMD_START_DIR": vscmd_path_full}):
+            try:
+                self.run(command, cwd=build_path_full)
+            except:
+                if self.settings.os == "Windows":
+                    read_cmd = "type"
+                else:
+                    read_cmd = "cat"
+                self.run("{0} bootstrap.log".format(read_cmd))
+                raise
 
         cxx_flags = []
 
@@ -55,7 +55,7 @@ class BoostBuildConan(ConanFile):
         except:
             pass
 
-        cxx_flags = 'cxxflags="%s"' % " ".join(cxx_flags) if cxx_flags else ""
+        cxx_flags = 'cxxflags="{0}"'.format(" ".join(cxx_flags) if cxx_flags else "")
         flags.append(cxx_flags)
 
         # JOIN ALL FLAGS
