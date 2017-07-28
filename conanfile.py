@@ -63,7 +63,7 @@ class BoostBuildConan(ConanFile):
 
         command = "b2" if self.settings.os == "Windows" else "./b2"
 
-        full_command = "cd %s && %s %s --abbreviate-paths" % (
+        full_command = "cd %s && %s %s link=static runtime-link=shared variant=debug --abbreviate-paths" % (
             self.src_folder,
             command,
             b2_flags)
