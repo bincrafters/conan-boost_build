@@ -12,9 +12,10 @@ class BoostBuildConan(ConanFile):
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/boostorg/build"
     src_folder = "git_src"
+    FOLDER_NAME = "boost_%s" % version.replace(".", "_")
 
     def source(self):
-        self.run("git clone --depth=50 --branch=develop %s.git %s" % (self.url, self.src_folder))
+        self.run("git clone --depth=50 --branch=boost-%s %s.git %s" % (self.url, self.version, self.FOLDER_NAME))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
@@ -29,11 +30,11 @@ class BoostBuildConan(ConanFile):
 
         try:
 
-            self.run("cd %s && %s" % (self.src_folder, command))
+            self.run("cd %s && %s" % (self.FOLDER_NAME, command))
         except:
-            self.run("cd %s && type bootstrap.log" % self.src_folder
+            self.run("cd %s && type bootstrap.log" % self.FOLDER_NAME
                      if self.settings.os == "Windows"
-                     else "cd %s && cat bootstrap.log" % self.src_folder)
+                     else "cd %s && cat bootstrap.log" % self.FOLDER_NAME)
             raise
 
         cxx_flags = []
@@ -64,7 +65,7 @@ class BoostBuildConan(ConanFile):
         command = "b2" if self.settings.os == "Windows" else "./b2"
 
         full_command = "cd %s && %s %s link=static runtime-link=shared variant=debug --abbreviate-paths" % (
-            self.src_folder,
+            self.FOLDER_NAME,
             command,
             b2_flags)
         self.output.warn(full_command)
