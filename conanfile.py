@@ -2,7 +2,6 @@
 """
 from conans import ConanFile, tools, os
 
-
 class BoostBuildConan(ConanFile):
     """Checkout Boost.Build, build and create package
     """
@@ -14,7 +13,8 @@ class BoostBuildConan(ConanFile):
     FOLDER_NAME = "boost_%s" % version.replace(".", "_")
 
     def source(self):
-        self.run("git clone --depth=50 --branch=boost-{0} {1}.git {2}".format(self.version, self.url, self.FOLDER_NAME))
+        self.run("git clone --depth=50 --branch=boost-{0} {1}.git {2}"
+                 .format(self.version, self.url, self.FOLDER_NAME))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
@@ -60,15 +60,9 @@ class BoostBuildConan(ConanFile):
 
         # JOIN ALL FLAGS
         b2_flags = " ".join(flags)
-
         command = "b2" if self.settings.os == "Windows" else "./b2"
-
-        full_command = "cd %s && %s %s --abbreviate-paths" % (
-            self.FOLDER_NAME,
-            command,
-            b2_flags)
+        full_command = "{0} {1} --abbreviate-paths".format(command, b2_flags)
         self.output.warn(full_command)
-
-        self.run(full_command)
+        self.run(full_command, cwd=self.FOLDER_NAME)
 
 
