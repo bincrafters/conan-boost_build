@@ -28,7 +28,7 @@ class BoostBuildConan(ConanFile):
             flags.append("toolset=%s"% self.settings.compiler)
 
         try:
-            print(self.run("pwd"))
+
             self.run("cd %s && %s" % (self.src_folder, command))
         except:
             self.run("cd %s && type bootstrap.log" % self.src_folder
