@@ -11,7 +11,6 @@ class BoostBuildConan(ConanFile):
     generators = "txt"
     settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/boostorg/build"
-    src_folder = "git_src"
     FOLDER_NAME = "boost_%s" % version.replace(".", "_")
 
     def source(self):
