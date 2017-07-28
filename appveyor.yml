@@ -1,5 +1,3 @@
-build: false
-
 environment:
     PYTHON: "C:\\Python27"
     PYTHON_VERSION: "2.7.8"
