@@ -14,7 +14,7 @@ class BoostBuildConan(ConanFile):
     src_folder = "git_src"
 
     def source(self):
-        self.run("git clone --depth=50 --branch=boost-%s %s.git %s" % (self.version, self.url, self.src_folder))
+        self.run("git clone --depth=50 --branch=develop %s.git %s" % (self.url, self.src_folder))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
