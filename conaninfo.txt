@@ -1,0 +1,26 @@
+[settings]
+
+
+[requires]
+
+
+[options]
+
+
+[full_settings]
+
+
+[full_requires]
+
+
+[full_options]
+
+
+[scope]
+    dev=True
+
+[recipe_hash]
+
+
+[env]
+
