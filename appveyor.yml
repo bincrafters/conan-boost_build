@@ -78,6 +78,6 @@ install:
   - conan remote add_ref Boost.Build/1.64.0@bincrafters/testing bincrafters
 
 build_script:
-  - cmd conan create Boost.Build/testing
+  - cmd: conan create Boost.Build/testing
 #test_script:
  # - python build.py
