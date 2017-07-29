@@ -8,13 +8,15 @@ class BoostBuildConan(ConanFile):
     name = "Boost.Build"
     version = "1.64.0"
     generators = "txt"
-    settings = "os", "arch", "compiler", "build_type"
     url = "https://github.com/boostorg/build"
-    FOLDER_NAME = "boost_%s" % version.replace(".", "_")
+    description = "Boost.Build makes it easy to build C++ projects, everywhere"
+    license = "www.boost.org/users/license.html"
+    folder_name = "boost_{0}".format(version.replace(".", "_"))
+    settings = "os", "compiler", "build_type", "arch"
 
     def source(self):
         self.run("git clone --depth=50 --branch=boost-{0} {1}.git {2}"
-                 .format(self.version, self.url, self.FOLDER_NAME))
+                 .format(self.version, self.url, self.folder_name))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
@@ -23,7 +25,7 @@ class BoostBuildConan(ConanFile):
             command += " mingw"
             flags.append("--layout=system")
 
-        build_path_full = os.path.join(self._conanfile_directory, self.FOLDER_NAME)
+        build_path_full = os.path.join(self._conanfile_directory, self.folder_name)
         vscmd_path_full = os.path.join(build_path_full, "src", "engine")
         with tools.environment_append({"VSCMD_START_DIR": vscmd_path_full}):
             try:
@@ -63,6 +65,11 @@ class BoostBuildConan(ConanFile):
         command = "b2" if self.settings.os == "Windows" else "./b2"
         full_command = "{0} {1} --abbreviate-paths".format(command, b2_flags)
         self.output.warn(full_command)
-        self.run(full_command, cwd=self.FOLDER_NAME)
+        self.run(full_command, cwd=self.folder_name)
 
-
+    def package(self):
+        release_dir = path.join(self.folder_name, "Release")
+        self.copy(pattern="*.h", dst="include", src=path.join(release_dir, "include"))
+        self.copy(pattern="*.hpp", dst="include", src=path.join(release_dir, "include"))
+        self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
+        self.copy(pattern="*.dll", dst="bin", src="bin", keep_path=False)
