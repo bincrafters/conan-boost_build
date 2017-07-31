@@ -6,8 +6,8 @@ env:
      - CONAN_REPO: "public-conan"
 
 install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+  - pip install conan --upgrade
+  - pip install conan_package_tools
   
 script:
   - export CONAN_REFERENCE_FULL=${CONAN_REFERENCE}@${CONAN_SUBJECT}/${CONAN_CHANNEL}
