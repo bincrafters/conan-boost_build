@@ -22,8 +22,8 @@ install:
   - pip.exe install conan_package_tools
 
 build_script:
-  - conan create %CONAN_REFERENCE%
-
+  - conan create %CONAN_SUBJECT%/%CONAN_CHANNEL%
+  
 deploy_script:
   - set CONAN_REFERENCE_FULL=%CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL%
   - echo %CONAN_REFERENCE_FULL%
