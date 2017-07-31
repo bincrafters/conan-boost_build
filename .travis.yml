@@ -10,6 +10,7 @@ install:
   
 script:
   - export CONAN_REFERENCE_FULL=${CONAN_REFERENCE}@${CONAN_SUBJECT}/${CONAN_CHANNEL}
+  - echo ${CONAN_REFERENCE_FULL}
   - conan create ${CONAN_REFERENCE_FULL}
   - conan user -p ${CONAN_KEY} --remote ${CONAN_SUBJECT} -c ${CONAN_USER}
   - conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
