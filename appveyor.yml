@@ -32,4 +32,4 @@ deploy_script:
   - conan remote add %CONAN_SUBJECT% "https://api.bintray.com/conan/%CONAN_SUBJECT%/%CONAN_REPO%"
   - conan remote add_ref %CONAN_REFERENCE_FULL% %CONAN_SUBJECT%
   - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% %CONAN_USER%
-  - conan upload %CONAN_REFERENCE_FULL%
+  - conan upload %CONAN_REFERENCE_FULL% --all
