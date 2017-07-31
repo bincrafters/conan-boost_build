@@ -3,6 +3,7 @@ env:
      - CONAN_REFERENCE: "Boost.Build/1.64.0"
      - CONAN_SUBJECT: "bincrafters"
      - CONAN_CHANNEL: "ci"
+     - CONAN_REFERENCE_FULL : {CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL}
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
      - CONAN_TOTAL_PAGES: 1
 
@@ -24,8 +25,10 @@ matrix:
 install:
   - chmod +x .travis/install.sh
   - ./.travis/install.sh
-  - conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
-  - conan remote add_ref %CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL%
   
 script:
   - conan create $CONAN_REFERENCE
+  - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% -c %CONAN_USER%
+  - conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
+  - conan remote add_ref $CONAN_REFERENCE_FULL
+  - conan upload %CONAN_REFERENCE_FULL%
