@@ -16,5 +16,5 @@ install:
   - ./.travis/install.sh
 
 script:
-  - conan create ${CONAN_REFERENCE}
+  - conan create $CONAN_REFERENCE
   

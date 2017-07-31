@@ -23,5 +23,5 @@ install:
   - conan remote add_ref Boost.Build/1.64.0@bincrafters/testing bincrafters
 
 build_script:
-  - echo {CONAN_REFERENCE}
-  - conan create {CONAN_REFERENCE}
+  - echo %CONAN_REFERENCE%
+  - conan create %CONAN_REFERENCE%
