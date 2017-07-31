@@ -11,21 +11,23 @@ class BoostBuildConan(ConanFile):
     url = "https://github.com/boostorg/build"
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"
-    folder_name = "boost_{0}".format(version.replace(".", "_"))
+    #build_folder_name = "boost_{0}".format(version.replace(".", "_"))
     settings = "os", "compiler", "build_type", "arch"
 
     def source(self):
-        self.run("git clone --depth=50 --branch=boost-{0} {1}.git {2}"
-                 .format(self.version, self.url, self.folder_name))
+        self.run("git clone --depth=50 --branch=boost-{0} {1}.git"
+                 .format(self.version, self.url))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
-
-        build_path_full = os.path.join(self._conanfile_directory, self.folder_name)
-        vscmd_path_full = os.path.join(build_path_full, "src", "engine")
-        with tools.environment_append({"VSCMD_START_DIR": vscmd_path_full}):
+        build_path = os.path.join(os.getcwd(), "build")
+        vscmd_path = os.path.join(build_path, "src", "engine")
+        
+        os.chdir(build_path)
+        
+        with tools.environment_append({"VSCMD_START_DIR": vscmd_path}):
             try:
-                self.run(command, cwd=build_path_full)
+                self.run(command)
             except:
                 if self.settings.os == "Windows":
                     read_cmd = "type"
@@ -35,15 +37,11 @@ class BoostBuildConan(ConanFile):
                 raise
 
         command = "b2" if self.settings.os == "Windows" else "./b2"
-        full_command = "{0} --abbreviate-paths".format(command)
-        self.output.warn(full_command)
-        self.run(full_command, cwd=self.folder_name)
+        full_command = "{0} --prefix=../output --abbreviate-paths".format(command)
+        self.run(full_command)
 
     def package(self):
-        self.copy(pattern="*", dst="include/boost", src="%s/boost" % self.folder_name)
-        self.copy(pattern="*.a", dst="lib", src="%s/stage/lib" % self.folder_name)
-        self.copy(pattern="*.so", dst="lib", src="%s/stage/lib" % self.folder_name)
-        self.copy(pattern="*.so.*", dst="lib", src="%s/stage/lib" % self.folder_name)
-        self.copy(pattern="*.dylib*", dst="lib", src="%s/stage/lib" % self.folder_name)
-        self.copy(pattern="*.lib", dst="lib", src="%s/stage/lib" % self.folder_name)
-        self.copy(pattern="*.dll", dst="bin", src="%s/stage/lib" % self.folder_name)
+        self.copy(pattern="*", dst="", src="output")
+        
+    def package_info(self):
+        self.cpp_info.bindirs = ["bin"]
