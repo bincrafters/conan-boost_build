@@ -40,4 +40,10 @@ class BoostBuildConan(ConanFile):
         self.run(full_command, cwd=self.folder_name)
 
     def package(self):
-        release_dir = path.join(self.folder_name, "Release")
+        self.copy(pattern="*", dst="include/boost", src="%s/boost" % self.FOLDER_NAME)
+        self.copy(pattern="*.a", dst="lib", src="%s/stage/lib" % self.FOLDER_NAME)
+        self.copy(pattern="*.so", dst="lib", src="%s/stage/lib" % self.FOLDER_NAME)
+        self.copy(pattern="*.so.*", dst="lib", src="%s/stage/lib" % self.FOLDER_NAME)
+        self.copy(pattern="*.dylib*", dst="lib", src="%s/stage/lib" % self.FOLDER_NAME)
+        self.copy(pattern="*.lib", dst="lib", src="%s/stage/lib" % self.FOLDER_NAME)
+        self.copy(pattern="*.dll", dst="bin", src="%s/stage/lib" % self.FOLDER_NAME)
