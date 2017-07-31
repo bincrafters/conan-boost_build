@@ -27,7 +27,7 @@ build_script:
 deploy_script:
   - set CONAN_REFERENCE_FULL=%CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL%
   - echo %CONAN_REFERENCE_FULL%
-  - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% %CONAN_USER%
   - conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
   - conan remote add_ref %CONAN_REFERENCE_FULL% bincrafters
+  - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% %CONAN_USER%
   - conan upload %CONAN_REFERENCE_FULL%
