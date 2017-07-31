@@ -4,6 +4,9 @@ environment:
     PYTHON_ARCH: "32"
 
     CONAN_REFERENCE: "Boost.Build/1.64.0"
+    CONAN_SUBJECT: "bincrafters"
+    CONAN_CHANNEL: "ci"
+    CONAN_REFERENCE_FULL : %CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL%
     VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
     CONAN_STABLE_BRANCH_PATTERN: "stable/*"
     CONAN_TOTAL_PAGES: 1   
@@ -18,10 +21,12 @@ install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - pip.exe install conan --upgrade
   - pip.exe install conan_package_tools
-  - conan user
+  - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% -c %CONAN_USER%
   - conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
-  - conan remote add_ref Boost.Build/1.64.0@bincrafters/testing bincrafters
+  - conan remote add_ref %CONAN_REFERENCE_FULL% bincrafters
 
 build_script:
-  - echo %CONAN_REFERENCE%
   - conan create %CONAN_REFERENCE%
+
+deploy_script:
+  - conan upload %CONAN_REFERENCE_FULL%
