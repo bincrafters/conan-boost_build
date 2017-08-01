@@ -7,15 +7,6 @@ environment:
     CONAN_SUBJECT: "bincrafters"
     CONAN_CHANNEL: "ci"
     CONAN_REPO: "public-conan"
-    VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
-    CONAN_STABLE_BRANCH_PATTERN: "stable/*"
-    CONAN_TOTAL_PAGES: 1   
-
-    matrix:
-        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-          CONAN_VISUAL_VERSIONS: 15
-          CONAN_CURRENT_PAGE: 1
-          CONAN_ARCHS: x86_64
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
@@ -29,6 +20,8 @@ deploy_script:
   - set CONAN_REFERENCE_FULL=%CONAN_REFERENCE%@%CONAN_SUBJECT%/%CONAN_CHANNEL%
   - echo %CONAN_REFERENCE_FULL%
   - conan remote add %CONAN_SUBJECT% "https://api.bintray.com/conan/%CONAN_SUBJECT%/%CONAN_REPO%"
-  - conan remote add_ref %CONAN_REFERENCE_FULL% %CONAN_SUBJECT%
   - conan user -p %CONAN_KEY% --remote %CONAN_SUBJECT% %CONAN_USER%
-  - conan upload %CONAN_REFERENCE_FULL% --all
+  - conan upload --all --remote %CONAN_SUBJECT%  %CONAN_REFERENCE_FULL%
+  
+  
+  
