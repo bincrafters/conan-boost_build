@@ -14,6 +14,5 @@ script:
   - echo ${CONAN_REFERENCE_FULL}
   - conan create ${CONAN_SUBJECT}/${CONAN_CHANNEL}
   - conan remote add ${CONAN_SUBJECT} "https://api.bintray.com/conan/${CONAN_SUBJECT}/${CONAN_REPO}"
-  - conan remote add_ref ${CONAN_REFERENCE_FULL} ${CONAN_SUBJECT}
   - conan user -p ${CONAN_KEY} --remote ${CONAN_SUBJECT} ${CONAN_USER}
-  - conan upload ${CONAN_REFERENCE_FULL} --all
+  - conan upload --all --remote ${CONAN_SUBJECT} ${CONAN_REFERENCE_FULL}
