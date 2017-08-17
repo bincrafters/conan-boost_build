@@ -3,12 +3,10 @@ from conans import ConanFile, tools, os
 class BoostBuildConan(ConanFile):
     name = "Boost.Build"
     version = "1.64.0"
-    generators = "txt"
     url = "https://github.com/boostorg/build"
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"
-    settings = "os", "compiler", "build_type", "arch"
-    lib_short_name = "build"
+    settings = "os"
           
     def source(self):
         self.run("git clone --depth=50 --branch=boost-{0} {1}.git"
@@ -17,7 +15,7 @@ class BoostBuildConan(ConanFile):
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         
-        build_dir = os.path.join(os.getcwd(), self.lib_short_name)
+        build_dir = os.path.join(os.getcwd(), "build")
         vscmd_path = os.path.join(build_dir, "src", "engine")
         
         os.chdir(build_dir)
@@ -42,3 +40,5 @@ class BoostBuildConan(ConanFile):
         
     def package_info(self):
         self.cpp_info.bindirs = ["bin"]
+        self.env_info.path = [os.path.join(self.package_folder, "bin")] + self.env_info.path
+        self.env_info.BOOST_BUILD_PATH = os.path.join(self.package_folder, "stage", "boost-build")
