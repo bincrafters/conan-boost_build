@@ -6,16 +6,15 @@ class BoostBuildConan(ConanFile):
     url = "https://github.com/boostorg/build"
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"
-    settings = "os"
+    settings = "os", "arch"
           
     def source(self):
-        self.run("git clone --depth=50 --branch=boost-{0} {1}.git"
-                 .format(self.version, self.url))
+        tools.get(self.url + "/archive/boost-" + self.version + ".tar.gz")
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         
-        build_dir = os.path.join(os.getcwd(), "build")
+        build_dir = os.path.join(os.getcwd(), "build-boost-" + self.version)
         vscmd_path = os.path.join(build_dir, "src", "engine")
         
         os.chdir(build_dir)
