@@ -40,4 +40,4 @@ class BoostBuildConan(ConanFile):
     def package_info(self):
         self.cpp_info.bindirs = ["bin"]
         self.env_info.path = [os.path.join(self.package_folder, "bin")] + self.env_info.path
-        self.env_info.BOOST_BUILD_PATH = os.path.join(self.package_folder, "stage", "boost-build")
+        self.env_info.BOOST_BUILD_PATH = os.path.join(self.package_folder, "share", "boost-build", "src", "kernel")
