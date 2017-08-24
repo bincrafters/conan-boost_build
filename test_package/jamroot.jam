@@ -1,1 +1,1 @@
-ECHO >>> jamroot.jam ;
+ECHO info: Success loading project jamroot.jam file. ;
