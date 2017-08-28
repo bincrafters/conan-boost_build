@@ -10,15 +10,16 @@ class BoostBuildConan(ConanFile):
     settings = "os", "arch"
           
     def source(self):
-        self.archive = "boost-" + self.version \
+        archive = "boost-" + self.version \
             if re.match("[0-9]+[.][0-9]+[.][0-9]+", self.version) \
             else self.version
-        tools.get(self.url + "/archive/" + self.archive + ".tar.gz")
+        tools.get(self.url + "/archive/" + archive + ".tar.gz")
+        os.rename("build-" + archive, "build")
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         
-        build_dir = os.path.join(os.getcwd(), "build-" + self.archive)
+        build_dir = os.path.join(os.getcwd(), "build")
         vscmd_path = os.path.join(build_dir, "src", "engine")
         
         os.chdir(build_dir)
