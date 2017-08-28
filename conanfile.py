@@ -1,4 +1,5 @@
 from conans import ConanFile, tools, os
+import re
 
 class BoostBuildConan(ConanFile):
     name = "Boost.Build"
@@ -9,12 +10,15 @@ class BoostBuildConan(ConanFile):
     settings = "os", "arch"
           
     def source(self):
-        tools.get(self.url + "/archive/boost-" + self.version + ".tar.gz")
+        self.archive = "boost-" + self.version \
+            if re.match("[0-9]+[.][0-9]+[.][0-9]+", self.version) \
+            else self.version
+        tools.get(self.url + "/archive/" + self.archive + ".tar.gz")
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
         
-        build_dir = os.path.join(os.getcwd(), "build-boost-" + self.version)
+        build_dir = os.path.join(os.getcwd(), "build-" + self.archive)
         vscmd_path = os.path.join(build_dir, "src", "engine")
         
         os.chdir(build_dir)
