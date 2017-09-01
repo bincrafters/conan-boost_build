@@ -3,7 +3,6 @@
 *.lo
 *.o
 *.obj
-*.pyc
 
 # Precompiled Headers
 *.gch
@@ -30,7 +29,10 @@
 *.app
 
 # Directories
+.idea
 __pycache__
+init.bat
+upload.bat
 build*
 bin*
 .vs

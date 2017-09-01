@@ -1,5 +1,5 @@
 from conans import ConanFile, tools, os
-import re
+
 
 class BoostBuildConan(ConanFile):
     name = "Boost.Build"
@@ -8,13 +8,15 @@ class BoostBuildConan(ConanFile):
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"
     settings = "os", "arch"
+    lib_short_names = ["build"]
           
     def source(self):
-        archive = "boost-" + self.version \
-            if re.match("[0-9]+[.][0-9]+[.][0-9]+", self.version) \
-            else self.version
-        tools.get(self.url + "/archive/" + archive + ".tar.gz")
-        os.rename("build-" + archive, "build")
+        boostorg_github = "https://github.com/boostorg"
+        archive_name = "boost-" + self.version  
+        for lib_short_name in self.lib_short_names:
+            tools.get("{0}/{1}/archive/{2}.tar.gz"
+                .format(boostorg_github, lib_short_name, archive_name))
+            os.rename(lib_short_name + "-" + archive_name, lib_short_name)
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
