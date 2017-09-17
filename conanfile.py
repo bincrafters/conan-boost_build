@@ -3,7 +3,7 @@ from conans import ConanFile, tools, os
 
 class BoostBuildConan(ConanFile):
     name = "Boost.Build"
-    version = "1.64.0"
+    version = "1.65.1"
     url = "https://github.com/boostorg/build"
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"

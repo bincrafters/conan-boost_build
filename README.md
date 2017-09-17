@@ -17,20 +17,20 @@ If your are in Windows you should run it from a VisualStudio console in order to
 
 ## Upload packages to server
 
-    $ conan upload Boost.Build/1.64.0@bincrafters/testing --all
+    $ conan upload Boost.Build/1.65.1@bincrafters/testing --all
 
 ## Reuse the packages
 
 ### Basic setup
 
-    $ conan install Boost.Build/1.64.0@bincrafters/testing
+    $ conan install Boost.Build/1.65.1@bincrafters/testing
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    Boost.Build/1.64.0@bincrafters/testing
+    Boost.Build/1.65.1@bincrafters/testing
 
     [generators]
     txt
