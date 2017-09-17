@@ -20,10 +20,8 @@ class BoostBuildConan(ConanFile):
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
-        
-        build_dir = os.path.join(os.getcwd(), "build")
+        build_dir = os.path.join(self.source_folder, "build")
         vscmd_path = os.path.join(build_dir, "src", "engine")
-        
         os.chdir(build_dir)
         
         with tools.environment_append({"VSCMD_START_DIR": vscmd_path}):
@@ -42,7 +40,8 @@ class BoostBuildConan(ConanFile):
         self.run(full_command)
 
     def package(self):
-        self.copy(pattern="*", dst="", src="output")
+        self.copy(pattern="*.exe", dst="", src="output")
+        self.copy(pattern="*.jam", dst="", src="output")
         
     def package_info(self):
         self.cpp_info.bindirs = ["bin"]
