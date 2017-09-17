@@ -5,6 +5,17 @@ env:
      - CONAN_CHANNEL: "ci"
      - CONAN_REPO: "public-conan"
 
+ linux: &linux
+   os: linux
+   sudo: required
+   language: python
+   python: "3.6"
+   services:
+     - docker
+osx: &osx
+   os: osx
+   language: generic
+   
 install:
   - pip install conan --upgrade
   - pip install conan_package_tools
