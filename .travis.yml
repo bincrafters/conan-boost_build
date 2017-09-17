@@ -17,8 +17,8 @@ osx: &osx
    language: generic
    
 install:
-  - pip install conan --upgrade
-  - pip install conan_package_tools
+  - sudo pip install conan --upgrade
+  - sudo pip install conan_package_tools
   
 script:
   - export CONAN_REFERENCE_FULL=${CONAN_REFERENCE}@${CONAN_SUBJECT}/${CONAN_CHANNEL}
@@ -27,3 +27,5 @@ script:
   - conan remote add ${CONAN_SUBJECT} "https://api.bintray.com/conan/${CONAN_SUBJECT}/${CONAN_REPO}"
   - conan user -p ${CONAN_KEY} --remote ${CONAN_SUBJECT} ${CONAN_USER}
   - conan upload --all --remote ${CONAN_SUBJECT} ${CONAN_REFERENCE_FULL}
+
+sudo: required
