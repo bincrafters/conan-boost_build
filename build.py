@@ -10,8 +10,12 @@ if __name__ == "__main__":
 
     user, repo = reponame_a.split("/") if reponame_a else reponame_t.split("/")
     channel, version = repobranch_a.split("/") if repobranch_a else repobranch_t.split("/")
-    name = re.search(r'name\s*=\s*"(\S*)"', contents).groups()[0]
-
+    
+    with open("conanfile.py", "r") as conanfile:
+        contents = conanfile.read()
+        name = re.search(r'name\s*=\s*"(\S*)"', contents).groups()[0]
+    
+    
     os.environ["CONAN_USER"] = user
     os.environ["CONAN_CHANNEL"] = channel
     os.environ["CONAN_REFERENCE"] = "{0}/{1}".format(name, version)
