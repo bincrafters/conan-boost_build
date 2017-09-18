@@ -1,4 +1,4 @@
-from conan.packager import ConanMultiPackager, os
+from conan.packager import ConanMultiPackager, os, re
 
     
 if __name__ == "__main__":
