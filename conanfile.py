@@ -40,7 +40,8 @@ class BoostBuildConan(ConanFile):
         self.run(full_command)
 
     def package(self):
-        self.copy(pattern="*.exe", dst="", src="output")
+        self.copy(pattern="*b2", dst="", src="output")
+        self.copy(pattern="*b2.exe", dst="", src="output")
         self.copy(pattern="*.jam", dst="", src="output")
         
     def package_info(self):
