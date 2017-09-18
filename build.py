@@ -8,15 +8,14 @@ if __name__ == "__main__":
     reponame_t = os.getenv("TRAVIS_REPO_SLUG","")
     repobranch_t = os.getenv("TRAVIS_BRANCH","")
 
-    user, repo = reponame_a.split("/") if reponame_a else reponame_t.split("/")
+    username, repo = reponame_a.split("/") if reponame_a else reponame_t.split("/")
     channel, version = repobranch_a.split("/") if repobranch_a else repobranch_t.split("/")
     
     with open("conanfile.py", "r") as conanfile:
         contents = conanfile.read()
         name = re.search(r'name\s*=\s*"(\S*)"', contents).groups()[0]
     
-    print(user + repo + channel + version)
-    os.environ["CONAN_USER"] = user
+    os.environ["CONAN_USERNAME"] = username
     os.environ["CONAN_CHANNEL"] = channel
     os.environ["CONAN_REFERENCE"] = "{0}/{1}".format(name, version)
     os.environ["CONAN_STABLE_BRANCH_PATTERN"]="stable*"
