@@ -15,7 +15,7 @@ if __name__ == "__main__":
         contents = conanfile.read()
         name = re.search(r'name\s*=\s*"(\S*)"', contents).groups()[0]
     
-    
+    print(user + repo + channel + version)
     os.environ["CONAN_USER"] = user
     os.environ["CONAN_CHANNEL"] = channel
     os.environ["CONAN_REFERENCE"] = "{0}/{1}".format(name, version)
