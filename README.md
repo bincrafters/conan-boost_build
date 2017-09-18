@@ -1,4 +1,4 @@
-## Boost.Build makes it easy to build C++ projects, everywhere
+## Boost.Build makes it easy to build C++ projects, everywhere.
 
 [![Build Status](https://travis-ci.org/bincrafters/conan-boost-build.svg?branch=testing%2F1.64.0)](https://travis-ci.org/bincrafters/conan-boost-build)
 [![Build status](https://ci.appveyor.com/api/projects/status/v5iuw7v9rlse9chp/branch/master?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-boost-build/branch/testing%2F1.64.0)
