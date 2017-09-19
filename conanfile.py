@@ -1,4 +1,5 @@
 from conans import ConanFile, tools, os
+import shutil
 
 
 class BoostBuildConan(ConanFile):
@@ -9,6 +10,7 @@ class BoostBuildConan(ConanFile):
     license = "www.boost.org/users/license.html"
     settings = "os", "arch"
     lib_short_names = ["build"]
+    exports = "*.jam"
           
     def source(self):
         boostorg_github = "https://github.com/boostorg"
@@ -17,6 +19,9 @@ class BoostBuildConan(ConanFile):
             tools.get("{0}/{1}/archive/{2}.tar.gz"
                 .format(boostorg_github, lib_short_name, archive_name))
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
+        shutil.copyfile(
+            os.path.join(self.conanfile_directory,'os.jam'),
+            os.path.join('build','src','util','os.jam'))
 
     def build(self):
         command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
