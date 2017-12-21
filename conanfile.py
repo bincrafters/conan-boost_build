@@ -5,7 +5,7 @@ import shutil
 
 class BoostBuildConan(ConanFile):
     name = "Boost.Build"
-    version = "1.65.1"
+    version = "1.66.0"
     url = "https://github.com/boostorg/build"
     description = "Boost.Build makes it easy to build C++ projects, everywhere"
     license = "www.boost.org/users/license.html"
