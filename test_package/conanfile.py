@@ -1,13 +1,12 @@
-from conans import ConanFile
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-class B2TestConan(ConanFile):
+from conans import ConanFile, tools
+
+
+class TestPackgeConan(ConanFile):
     settings = "os", "arch"
-
-    def build(self):
-        pass
     
-    def imports(self):
-        self.copy("jamroot.jam", dst=".", src=self.conanfile_directory)
-
     def test(self):
+        tools.save("jamroot.jam", "ECHO info: Success loading project jamroot.jam file. ;")
         self.run("b2 --debug-configuration")

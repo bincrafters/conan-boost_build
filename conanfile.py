@@ -1,17 +1,20 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from conans import ConanFile, tools
 import os
 import shutil
 
 
 class BoostBuildConan(ConanFile):
-    name = "Boost.Build"
+    name = "boost_build"
     version = "1.66.0"
-    url = "https://github.com/boostorg/build"
-    description = "Boost.Build makes it easy to build C++ projects, everywhere"
-    license = "www.boost.org/users/license.html"
+    url = "https://github.com/bincrafters/conan-boost-build"
+    description = "boost_build makes it easy to build C++ projects, everywhere"
+    license = "BSL-1.0"
     settings = "os", "arch"
     lib_short_names = ["build"]
-    exports = "*.jam"
+    exports_sources = "*.jam"
           
     def source(self):
         boostorg_github = "https://github.com/boostorg"
@@ -20,8 +23,7 @@ class BoostBuildConan(ConanFile):
             tools.get("{0}/{1}/archive/{2}.tar.gz"
                 .format(boostorg_github, lib_short_name, archive_name))
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
-        shutil.copyfile(
-            os.path.join(self.conanfile_directory,'os.jam'),
+        shutil.copyfile('os.jam',
             os.path.join('build','src','util','os.jam'))
 
     def build(self):
