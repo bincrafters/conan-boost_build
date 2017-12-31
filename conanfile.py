@@ -9,7 +9,7 @@ import shutil
 class BoostBuildConan(ConanFile):
     name = "boost_build"
     version = "1.66.0"
-    url = "https://github.com/bincrafters/conan-boost-build"
+    url = "https://github.com/bincrafters/conan-boost_build"
     description = "boost_build makes it easy to build C++ projects, everywhere"
     license = "BSL-1.0"
     settings = "os", "arch"
