@@ -7,6 +7,7 @@ import importlib
 import os
 import platform
 
+
 def get_module_location():
     repo = os.getenv("CONAN_MODULE_REPO", "https://raw.githubusercontent.com/bincrafters/conan-templates")
     branch = os.getenv("CONAN_MODULE_BRANCH", "package_tools_modules")
@@ -30,6 +31,8 @@ def get_os():
 
     
 if __name__ == "__main__":
+    
+    os.environ["CONAN_UPLOAD_ONLY_WHEN_STABLE"] = ""
     
     tools.download(get_module_url(), get_module_filename(), overwrite=True)
     
