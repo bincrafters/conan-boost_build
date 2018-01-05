@@ -14,7 +14,7 @@ def get_module_location():
 
     
 def get_module_name():
-    return os.getenv("CONAN_MODULE_NAME", "build_template_boost_default")
+    return os.getenv("CONAN_MODULE_NAME", "build_template_installer")
 
     
 def get_module_filename():
@@ -24,6 +24,10 @@ def get_module_filename():
 def get_module_url():
     return get_module_location() + "/" + get_module_filename()
 
+
+def get_os():
+    return platform.system().replace("Darwin", "Macos")
+
     
 if __name__ == "__main__":
     
@@ -32,6 +36,7 @@ if __name__ == "__main__":
     module = importlib.import_module(get_module_name())
     
     builder = module.get_builder()
-    
+    builder.add(settings={"os" : get_os(), "arch" : "x86"}, {}, {}, {})
+    builder.add(settings={"os" : get_os(), "arch" : "x86_64"}, {}, {}, {})
     builder.run()
 
