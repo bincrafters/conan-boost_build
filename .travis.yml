@@ -5,6 +5,7 @@ linux: &linux
    python: "3.6"
    services:
      - docker
+     
 matrix:
    include:
       - <<: *linux
