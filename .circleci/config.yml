@@ -13,13 +13,6 @@ version: 2
           chmod +x .circleci/run.sh
           .circleci/run.sh
 jobs:
-  xcode8:
-    macos:
-      xcode: "8.3.3"
-    environment:
-      - CONAN_APPLE_CLANG_VERSIONS: "8.1"
-    <<: *conan-steps
-
   xcode9:
     macos:
       xcode: "9.0"
@@ -31,5 +24,4 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - xcode8
       - xcode9
