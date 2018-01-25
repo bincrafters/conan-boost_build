@@ -12,7 +12,9 @@ class BoostBuildConan(ConanFile):
     url = "https://github.com/bincrafters/conan-boost_build"
     description = "boost_build makes it easy to build C++ projects, everywhere"
     license = "BSL-1.0"
-    settings = "os", "arch"
+    author = "Bincrafters <bincrafters@gmail.com>"
+    exports = ["LICENSE.md"]
+    settings = "os", "arch"    
     lib_short_names = ["build"]
     exports_sources = "*.jam"
           
