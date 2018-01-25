@@ -4,8 +4,6 @@ set -e
 set -x
 
 brew update || brew update
-brew outdated pyenv || brew upgrade pyenv
-brew install pyenv-virtualenv
 brew install cmake || true
 
 if which pyenv > /dev/null; then
