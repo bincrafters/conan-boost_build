@@ -5,6 +5,8 @@
 from bincrafters import build_template_installer
 from bincrafters import build_shared
 
+os.environ["CONAN_UPLOAD_ONLY_WHEN_STABLE"] = ""
+    
 if __name__ == "__main__":
 
     builder = build_template_installer.get_builder()
