@@ -20,8 +20,8 @@ class BoostBuildConan(ConanFile):
           
     def source(self):
         boostorg_github = "https://github.com/boostorg"
-        # archive_name = "boost-" + self.version
-        archive_name = "master"
+        archive_name = "boost-" + self.version
+        # archive_name = "master"
         for lib_short_name in self.lib_short_names:
             tools.get("{0}/{1}/archive/{2}.tar.gz"
                 .format(boostorg_github, lib_short_name, archive_name))
