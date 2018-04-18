@@ -29,7 +29,8 @@ class BoostBuildConan(ConanFile):
                         os.path.join('build', 'src', 'util', 'os.jam'))
 
     def build(self):
-        command = "bootstrap" if self.settings.os == "Windows" else "./bootstrap.sh"
+        use_windows_commands = os.name == 'nt'
+        command = "bootstrap" if use_windows_commands else "./bootstrap.sh"
         build_dir = os.path.join(self.source_folder, "build")
         vscmd_path = os.path.join(build_dir, "src", "engine")
         os.chdir(build_dir)
@@ -38,14 +39,11 @@ class BoostBuildConan(ConanFile):
             try:
                 self.run(command)
             except:
-                if self.settings.os == "Windows":
-                    read_cmd = "type"
-                else:
-                    read_cmd = "cat"
+                read_cmd = "type" if use_windows_commands else "cat"
                 self.run("{0} bootstrap.log".format(read_cmd))
                 raise
 
-        command = "b2" if self.settings.os == "Windows" else "./b2"
+        command = "b2" if use_windows_commands else "./b2"
         full_command = "{0} --prefix=../output --abbreviate-paths".format(command)
         self.run(full_command)
 
