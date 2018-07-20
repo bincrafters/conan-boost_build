@@ -14,7 +14,7 @@ class BoostBuildConan(ConanFile):
     license = "BSL-1.0"
     author = "Bincrafters <bincrafters@gmail.com>"
     exports = ["LICENSE.md"]
-    settings = "os", "arch"
+    settings = "os_build", "arch_build"
     lib_short_names = ["build"]
     exports_sources = "*.jam"
 
