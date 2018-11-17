@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import python_requires
+from conans import ConanFile, tools
 import os
 import shutil
 
-base = python_requires("boost_base/1.67.0@bincrafters/testing")
 
-class BoostBuildConan(base.BoostBaseConan):
+class BoostBuildConan(ConanFile):
     name = "boost_build"
     url = "https://github.com/bincrafters/conan-boost_build"
     description = "boost_build makes it easy to build C++ projects, everywhere"
