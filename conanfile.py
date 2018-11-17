@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import ConanFile, tools
+from conans import python_requires
 import os
 import shutil
 
 
-class BoostBuildConan(ConanFile):
+class BoostBuildConan(base.BoostBaseConan):
     name = "boost_build"
-    version = "1.67.0"
     url = "https://github.com/bincrafters/conan-boost_build"
     description = "boost_build makes it easy to build C++ projects, everywhere"
     license = "BSL-1.0"
-    author = "Bincrafters <bincrafters@gmail.com>"
-    exports = ["LICENSE.md"]
     settings = "os", "arch"
     lib_short_names = ["build"]
     exports_sources = "*.jam"
