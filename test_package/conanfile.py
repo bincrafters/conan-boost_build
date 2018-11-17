@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import python_requires
+from conans import ConanFile, tools
 
-
-base = python_requires("boost_base/1.67.0@bincrafters/testing")
 
 class TestPackgeConan(ConanFile):
     settings = "os", "arch"

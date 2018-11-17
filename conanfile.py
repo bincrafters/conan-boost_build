@@ -5,6 +5,7 @@ from conans import python_requires
 import os
 import shutil
 
+base = python_requires("boost_base/1.67.0@bincrafters/testing")
 
 class BoostBuildConan(base.BoostBaseConan):
     name = "boost_build"
