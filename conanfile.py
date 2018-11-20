@@ -8,12 +8,9 @@ import shutil
 
 class BoostBuildConan(ConanFile):
     name = "boost_build"
-    version = "1.66.0"
     url = "https://github.com/bincrafters/conan-boost_build"
     description = "boost_build makes it easy to build C++ projects, everywhere"
     license = "BSL-1.0"
-    author = "Bincrafters <bincrafters@gmail.com>"
-    exports = ["LICENSE.md"]
     settings = "os_build", "arch_build"
     lib_short_names = ["build"]
     exports_sources = "*.jam"
@@ -21,12 +18,15 @@ class BoostBuildConan(ConanFile):
     def source(self):
         boostorg_github = "https://github.com/boostorg"
         archive_name = "boost-" + self.version
+        # archive_name = "master"
         for lib_short_name in self.lib_short_names:
-            tools.get("{0}/{1}/archive/{2}.tar.gz"
-                      .format(boostorg_github, lib_short_name, archive_name))
+            tools.get(
+                "{0}/{1}/archive/{2}.tar.gz"
+                .format(boostorg_github, lib_short_name, archive_name))
             os.rename(lib_short_name + "-" + archive_name, lib_short_name)
-        shutil.copyfile('os.jam',
-                        os.path.join('build', 'src', 'util', 'os.jam'))
+        shutil.copyfile(
+            'os.jam',
+            os.path.join('build', 'src', 'util', 'os.jam'))
 
     def build(self):
         use_windows_commands = os.name == 'nt'
