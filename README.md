@@ -1,46 +1,47 @@
-## Boost.Build makes it easy to build C++ projects, everywhere.
+## Package Status
 
-[![Build status](https://ci.appveyor.com/api/projects/status/v5iuw7v9rlse9chp/branch/stable/1.65.1?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-boost-build/branch/stable/1.65.1)
-[![Travis Status](https://travis-ci.org/bincrafters/conan-boost-build.svg?branch=stable%2F1.65.1)](https://travis-ci.org/bincrafters/conan-boost-build)
-[![Download](https://api.bintray.com/packages/bincrafters/public-conan/Boost.Build%3Abincrafters/images/download.svg?version=1.65.1%3Astable) ](https://bintray.com/bincrafters/public-conan/Boost.Build%3Abincrafters/1.65.1%3Astable/link)
+| Bintray | Windows | Linux & macOS | 
+|:--------:|:---------:|:-----------------:|
+|[![Download](https://api.bintray.com/packages/bincrafters/public-conan/boost_build%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/boost_build%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-boost_build?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-boost-build)|[![Build Status](https://travis-ci.org/bincrafters/conan-boost_build.svg)](https://travis-ci.org/bincrafters/conan-boost_build)|
 
-[Conan.io](https://conan.io) package for [Boost.Build](https://github.com/boostorg/build) project
+## Conan.io Information
 
-The packages generated with this **conanfile** can be found in [Bintray](https://bintray.com/bincrafters/conan-public/Boost.Build%3Abincrafters).
+Bincrafters packages can be found in the following public Conan repository:
 
-## Build packages
+[Bincrafters Public Conan Repository on Bintray](https://bintray.com/bincrafters/public-conan)
 
-Download conan client from [Conan.io](https://conan.io) and run:
+*Note: You can click the "Set Me Up" button on the Bintray page above for instructions on using packages from this repository.*
 
-    $ python build.py
+## Issues
 
-If your are in Windows you should run it from a VisualStudio console in order to get "mc.exe" in path.
+If you wish to report an issue or make a request for a Bincrafters package, please do so here:  
 
-## Upload packages to server
+[Bincrafters Community Issues](https://github.com/bincrafters/community/issues)
 
-    $ conan upload Boost.Build/1.65.1@bincrafters/stable --all
+## General Information
 
-## Reuse the packages
+This GIT repository is managed by the Bincrafters team and holds files related to Conan.io.  For detailed information about Bincrafters and Conan.io, please visit the following resources: 
 
-### Basic setup
+[Bincrafters Wiki - Common README](https://github.com/bincrafters/community/wiki/Common-README.md)
 
-    $ conan install Boost.Build/1.65.1@bincrafters/stable
+[Bincrafters Technical Documentation](http://bincrafters.readthedocs.io/en/latest/)
 
-### Project setup
+[Bincrafters Blog](https://bincrafters.github.io)
 
-If you handle multiple dependencies in your project is better to add a *conanfile.txt*
+## License Information
 
-    [requires]
-    Boost.Build/1.65.1@bincrafters/stable
+Bincrafters packages are hosted on [Bintray](https://bintray.com) and contain Open-Source software which is licensed by the software's maintainers and NOT Bincrafters.  For each Open-Source package published by Bincrafters, the packaging process obtains the required license files along with the original source files from the maintainer, and includes these license files in the generated Conan packages.  
 
-    [generators]
-    txt
+The contents of this GIT repository are completely separate from the software being packaged and therefor licensed separately.  The license for all files contained in this GIT repository are defined in the [LICENSE.md](LICENSE.md) file in this repository.  The licenses included with all Conan packages published by Bincrafters can be found in the Conan package directories in the following locations, relative to the Conan Cache root (`~/.conan` by default): 
 
-Complete the installation of requirements for your project running:
+### License(s) for packaged software: 
 
-    conan install .
+    ~/.conan/data/<pkg_name>/<pkg_version>/bincrafters/package/<random_package_id>/license/<LICENSE_FILES_HERE>
 
-Project setup installs the library (and all his dependencies) and generates the files *conanbuildinfo.txt* with all the paths and variables that you need to link with your dependencies.
+*Note :   The most common filenames for OSS licenses are `LICENSE` AND `COPYING` without file extensions.*
+	
+### License for Bincrafters recipe: 
 
-### License
-[Boost](www.boost.org/LICENSE_1_0.txt)
+    ~/.conan/data/<pkg_name>/<pkg_version>/bincrafters/export/LICENSE.md 
+
+	
