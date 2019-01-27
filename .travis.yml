@@ -11,17 +11,17 @@ osx: &osx
 matrix:
    include:
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_ARCHS=x86 CONAN_DOCKER_IMAGE=conanio/clang40 CONAN_DOCKER_32_IMAGES=1
+        env: CONAN_CLANG_VERSIONS=5.0 CONAN_ARCHS=x86 CONAN_DOCKER_IMAGE=conanio/clang50 CONAN_DOCKER_32_IMAGES=1
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang40
+        env: CONAN_CLANG_VERSIONS=5.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang50
       - <<: *osx
         osx_image: xcode9
         env: CONAN_APPLE_CLANG_VERSIONS=9.0
 
 install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+  - chmod +x .ci/install.sh
+  - ./.ci/install.sh
 
 script:
-  - chmod +x .travis/run.sh
-  - ./.travis/run.sh
+  - chmod +x .ci/run.sh
+  - ./.ci/run.sh
